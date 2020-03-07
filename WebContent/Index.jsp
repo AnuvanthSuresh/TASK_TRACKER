@@ -12,7 +12,7 @@
 
 <h1 align="center"><b>Welcome to task tracker</b></h1><br><br><br><br>
 
-<form action="LoginAuthenticateServlet" method="get" >
+<form action="LoginAuthenticateServlet" method="post" >
 
 Login<br>
 
@@ -20,6 +20,7 @@ Username : <input type="text" name="username"><br>
 Password : <input type="password" name="password"><br>
 <input type="SUBMIT" name="LOGIN">
 </form>
-
+<br>
+<br><a href="RegisterUser.jsp">NEW USER</a>
 </body>
 </html>

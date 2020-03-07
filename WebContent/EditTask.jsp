@@ -26,6 +26,7 @@ request.setAttribute("Flag","Edit_Task");
 rd.forward(request, response);
 }
 %>
+<a href="LogoutServlet">LOGOUT</a>
 <form action="EditTaskServlet" method="get"> 
         <TABLE BORDER="1">
             <TR>

@@ -16,7 +16,7 @@ import com.TaskTrackerDeploy.DAO.AllTaskDAO;
 @WebServlet("/LoginAuthenticateServlet")
 public class LoginAuthenticateServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String uname = (String) request.getParameter("username");
 		String pass = (String) request.getParameter("password");

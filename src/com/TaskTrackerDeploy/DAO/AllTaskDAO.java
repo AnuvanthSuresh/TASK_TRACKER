@@ -61,13 +61,13 @@ public class AllTaskDAO extends DAO {
 	}
 	
 	// Reset All
-	public void ResetAll() {
+	public void ResetAll(String user) {
 		
 			try {
 
 				Connection db = DAO.Intialize_DB();
 				Statement statement = db.createStatement();
-				String updateQuery = "DELETE FROM task_main";
+				String updateQuery = "DELETE FROM task_main WHERE uname ='"+user+"'";
 				statement.executeUpdate(updateQuery);
 				statement.executeUpdate("ALTER SEQUENCE task_main_task_id_seq RESTART WITH 1");
 			
@@ -87,25 +87,29 @@ public class AllTaskDAO extends DAO {
 			Connection db = DAO.Intialize_DB();
 			Statement statement = db.createStatement();
 			String updateQuery = "INSERT INTO task_main (date,task,status,uname) values ('"+date+"','"+ Task +"','due','"+user+"');";
+			System.out.println(updateQuery);
 			statement.executeUpdate(updateQuery);
 		
 		} catch (Exception e) {
 			System.out.println("Exception While Adding");
+			e.printStackTrace();
 		}
 		
 	}
 	
 	// Edit existing task
-	public void EditTask(String Task, Date date, String task_id) {
+	public void EditTask(String Task, Date date, String task_id, String user) {
 		//SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");  
 		//String newdate = formatter.format(date);
+		
 		try {
 
 			Connection db = DAO.Intialize_DB();
 			Statement statement = db.createStatement();
-			String updateQuery = "UPDATE task_main SET date='" + date + "',task='" + Task + "' WHERE task_id='"+ task_id +"';";
+			String updateQuery = "UPDATE task_main SET date='" + date + "',task='" + Task + "' WHERE task_id='"+ task_id +"' AND uname ='"+user+"';";
+			System.out.println(updateQuery);
 			statement.executeUpdate(updateQuery);
-		
+		System.out.println("Edit sucess");
 		} catch (Exception e) {
 			System.out.println("Exception While Adding");
 		}
@@ -129,5 +133,38 @@ public Boolean AuthenticateUser(String uname, String pass) {
 	}
 	
 	return false;
+}
+
+// Register new user
+public void RegisterUser(String username, String password) {
+	Connection db = DAO.Intialize_DB();
+	try {
+	Statement statement = db.createStatement();
+	String query = "insert into task_main_login_data (uname,md5pwd) values('"+username+"',md5('"+password+"'));";
+	statement.executeUpdate(query);
+	}
+	catch (Exception e) {
+		System.out.println("Register Error");
+	}
+	
+	
+}
+
+// Delete exisiting user 
+public void DeleteUser(String username, String Feedback) {
+	Connection db = DAO.Intialize_DB();
+	try {
+		Statement statement = db.createStatement();
+		String deletelogintable = "delete from task_main_login_data where uname='"+username+"';";
+		statement.executeUpdate(deletelogintable);
+		String deletetasktable = "delete from task_main where uname='"+username+"';";
+		statement.executeUpdate(deletetasktable);
+		String addFeedback = "insert into task_main_feedback(uname,feedback) values('"+username+"','"+Feedback+"');";
+		statement.executeUpdate(addFeedback);
+	
+	}
+	catch (Exception e) {
+		System.out.println("Error updating delete user");
+	}
 }
 }

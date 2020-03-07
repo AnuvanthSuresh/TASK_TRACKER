@@ -29,7 +29,7 @@ ArrayList<AllTaskModel> TList = new ArrayList<AllTaskModel>();
 	TList = (ArrayList<AllTaskModel>)request.getAttribute("taskDta");
 
 %>
-
+<a href="LogoutServlet">LOGOUT</a>
 <form action="UpdateServlet" method="get"> 
         <TABLE BORDER="1">
             <TR>

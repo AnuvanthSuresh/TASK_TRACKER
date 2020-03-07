@@ -16,7 +16,7 @@ if(session.getAttribute("uname")==null)
 <h1>ADD NEW TASK</h1>
 <br>
 <br><br><br><br><br>
-
+<a href="LogoutServlet">LOGOUT</a>
 <form action="AddTaskServlet" method="get">
 
 Task : <input type="text" name="newTask"> <br>

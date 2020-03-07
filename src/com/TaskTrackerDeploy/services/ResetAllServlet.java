@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.TaskTrackerDeploy.DAO.AllTaskDAO;
 
@@ -19,8 +20,10 @@ public class ResetAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       AllTaskDAO delete  = new AllTaskDAO();
-       delete.ResetAll();
+       HttpSession session = request.getSession();
+       String user = (String)session.getAttribute("uname");
+		AllTaskDAO delete  = new AllTaskDAO();
+       delete.ResetAll(user);
        RequestDispatcher rd = request.getRequestDispatcher("AllTaskServlet");
        rd.forward(request, response);
 	}
