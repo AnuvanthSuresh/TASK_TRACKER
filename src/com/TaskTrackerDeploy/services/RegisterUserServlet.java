@@ -22,8 +22,15 @@ public class RegisterUserServlet extends HttpServlet {
 		String newUsername = request.getParameter("newusername");
 		String newPassword = request.getParameter("newpassword");
 		AllTaskDAO registerUser = new AllTaskDAO();
-		registerUser.RegisterUser(newUsername, newPassword);
+		Boolean state = registerUser.RegisterUser(newUsername, newPassword);
+		if(state) {
 		response.sendRedirect("Index.jsp");
-	}
+		System.out.println("Navigating to Index");
+		}
+		else {
+	    response.sendRedirect("Alert.jsp");
+	    System.out.println("Navigating to alert");
+		}
+		}
 
 }

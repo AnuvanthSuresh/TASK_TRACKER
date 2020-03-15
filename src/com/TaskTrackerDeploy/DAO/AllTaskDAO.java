@@ -136,15 +136,17 @@ public Boolean AuthenticateUser(String uname, String pass) {
 }
 
 // Register new user
-public void RegisterUser(String username, String password) {
+public Boolean RegisterUser(String username, String password) {
 	Connection db = DAO.Intialize_DB();
 	try {
 	Statement statement = db.createStatement();
 	String query = "insert into task_main_login_data (uname,md5pwd) values('"+username+"',md5('"+password+"'));";
 	statement.executeUpdate(query);
+	return true;
 	}
 	catch (Exception e) {
 		System.out.println("Register Error");
+	return false;
 	}
 	
 	
